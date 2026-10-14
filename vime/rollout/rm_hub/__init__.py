@@ -1,8 +1,8 @@
+from __future__ import annotations
+
 import asyncio
 import logging
 import random
-
-import aiohttp
 
 logger = logging.getLogger(__name__)
 
@@ -19,7 +19,9 @@ from .math_utils import grade_answer_verl
 _shared_session: aiohttp.ClientSession | None = None
 
 
-def _get_shared_session() -> aiohttp.ClientSession:
+def _get_shared_session() -> "aiohttp.ClientSession":
+    import aiohttp
+
     global _shared_session
     if _shared_session is None or _shared_session.closed:
         connector = aiohttp.TCPConnector(
