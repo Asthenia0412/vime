@@ -3,11 +3,15 @@ from __future__ import annotations
 import asyncio
 import logging
 import random
+from typing import TYPE_CHECKING
 
 logger = logging.getLogger(__name__)
 
 from vime.utils.misc import load_function
 from vime.utils.types import Sample
+
+if TYPE_CHECKING:
+    import aiohttp
 
 from .deepscaler import get_deepscaler_rule_based_reward
 from .f1 import f1_score
