@@ -23,7 +23,7 @@ from .math_utils import grade_answer_verl
 _shared_session: aiohttp.ClientSession | None = None
 
 
-def _get_shared_session() -> "aiohttp.ClientSession":
+def _get_shared_session() -> aiohttp.ClientSession:
     import aiohttp
 
     global _shared_session
@@ -116,12 +116,8 @@ async def batched_async_rm(
 
     rm_name = args.custom_rm_path or args.rm_type or "batched_async_rm"
     if rewards is None or isinstance(rewards, (str, bytes, bytearray, dict)):
-        raise TypeError(
-            f"batched reward model {rm_name!r} returned {type(rewards).__name__} instead of an iterable of rewards"
-        )
+        raise TypeError(f"batched reward model {rm_name!r} returned {type(rewards).__name__} instead of an iterable of rewards")
     rewards = list(rewards)
     if len(rewards) != len(samples):
-        raise ValueError(
-            f"batched reward model {rm_name!r} returned {len(rewards)} rewards for {len(samples)} samples"
-        )
+        raise ValueError(f"batched reward model {rm_name!r} returned {len(rewards)} rewards for {len(samples)} samples")
     return rewards
